@@ -22,7 +22,7 @@ templates = ["letter_1.txt", "letter_2.txt", "letter_3.txt"]
 
 # Open birthday recipients list
 df = pd.read_csv("birthdays.csv")
-# Stores the row index(s) in birthday_list where the current month/day matches a row within the birthdays.csv file
+# Stores the row index(s) in birthday_list if the current month/day matches a row within the birthdays.csv file
 birthday_list = df.loc[(df['month'] == current_month) & (df['day'] == day_of_month)].index
 
 
