@@ -40,7 +40,8 @@ for recipient in birthday_list:
         draft = draft_letter.read()
         new_letter = draft.replace("[NAME]", birthday_name)
 
-        # Sends the new_letter to the recipient email
+        # Sends the new_letter to the recipient email using gmail smtp. Can replace smtp with your email provider server
+        # and secure port
         with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
             connection.starttls()
             connection.login(user=sender_email, password=password)
