@@ -10,9 +10,10 @@ import pandas as pd
 import random
 
 # Program Variables
-sender_email = "user@user.com"
-recipient_email = "user@user.com"
-password = "sender email password"
+SENDER_EMAIL = "user@user.com"
+SENDER_PASSWORD = "sender email password"
+RECIPIENT_EMAIL = "user@user.com"
+
 now = dt.datetime.now()
 day_of_month = now.day
 current_month = now.month
@@ -44,8 +45,8 @@ for recipient in birthday_list:
         # and secure port
         with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
             connection.starttls()
-            connection.login(user=sender_email, password=password)
-            connection.sendmail(from_addr=sender_email,
-                                to_addrs=recipient_email,
+            connection.login(user=SENDER_EMAIL, password=SENDER_PASSWORD)
+            connection.sendmail(from_addr=SENDER_EMAIL,
+                                to_addrs=RECIPIENT_EMAIL,
                                 msg=f"Subject:Happy Birthday!\n\n{new_letter}"
                                 )
