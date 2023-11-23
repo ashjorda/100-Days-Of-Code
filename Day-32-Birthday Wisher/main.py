@@ -47,5 +47,5 @@ for recipient in birthday_list:
             connection.login(user=sender_email, password=password)
             connection.sendmail(from_addr=sender_email,
                                 to_addrs=recipient_email,
-                                msg=f"Happy Birthday!\n\n{new_letter}"
+                                msg=f"Subject:Happy Birthday!\n\n{new_letter}"
                                 )
