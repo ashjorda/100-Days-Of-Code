@@ -11,15 +11,12 @@ import random
 
 # Program Variables
 SENDER_EMAIL = "user@user.com"
-SENDER_PASSWORD = "sender email password"
+SENDER_PASSWORD = "<sender email password here>"
 RECIPIENT_EMAIL = "user@user.com"
 
 now = dt.datetime.now()
 day_of_month = now.day
 current_month = now.month
-
-# Birthday letter template file names from /letter_templates directory
-templates = ["letter_1.txt", "letter_2.txt", "letter_3.txt"]
 
 # Open birthday recipients list
 df = pd.read_csv("birthdays.csv")
@@ -32,14 +29,13 @@ for recipient in birthday_list:
     birthday_name = df.at[recipient, "name"]
     birthday_email = df.at[recipient, "email"]
 
-    # Randomly chooses a letter_template from the template list, then reads the template into draft, and
+    # Randomly chooses a letter_template from the templates folder, then reads the template into "letter", and
     # replaces the [NAME] placeholder with the birthday_name variable.
-    # Then store the template with the proper name in new_letter
+    # Then stores the replaced letter with back inside "letter"
 
-    birthday_template = random.choice(templates)
-    with open(f"letter_templates/{birthday_template}", "r") as draft_letter:
-        draft = draft_letter.read()
-        new_letter = draft.replace("[NAME]", birthday_name)
+    with open(f"letter_templates/letter_{random.randint(1,3)}.txt", "r") as birthday_letter:
+        letter = birthday_letter.read()
+        letter = letter.replace("[NAME]", birthday_name)
 
         # Sends the new_letter to the recipient email using gmail smtp. Can replace smtp with your email provider server
         # and secure port
@@ -48,5 +44,5 @@ for recipient in birthday_list:
             connection.login(user=SENDER_EMAIL, password=SENDER_PASSWORD)
             connection.sendmail(from_addr=SENDER_EMAIL,
                                 to_addrs=RECIPIENT_EMAIL,
-                                msg=f"Subject:Happy Birthday!\n\n{new_letter}"
+                                msg=f"Subject:Happy Birthday!\n\n{letter}"
                                 )
