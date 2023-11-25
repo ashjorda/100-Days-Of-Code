@@ -1,10 +1,12 @@
 from tkinter import *
+import requests
 
+kanye_said = requests.get("https://api.kanye.rest/")
 
 def get_quote():
-    pass
-    #Write your code here.
-
+    # Write your code here.
+    kanye_what = requests.get("https://api.kanye.rest/")
+    canvas.itemconfig(quote_text, text=f"{kanye_what.json()['quote']}")
 
 
 window = Tk()
@@ -14,13 +16,11 @@ window.config(padx=50, pady=50)
 canvas = Canvas(width=300, height=414)
 background_img = PhotoImage(file="background.png")
 canvas.create_image(150, 207, image=background_img)
-quote_text = canvas.create_text(150, 207, text="Kanye Quote Goes HERE", width=250, font=("Arial", 30, "bold"), fill="white")
+quote_text = canvas.create_text(150, 207, text=f"{kanye_said.json()['quote']}", width=250, font=("Arial", 30, "bold"), fill="white")
 canvas.grid(row=0, column=0)
 
 kanye_img = PhotoImage(file="kanye.png")
 kanye_button = Button(image=kanye_img, highlightthickness=0, command=get_quote)
 kanye_button.grid(row=1, column=0)
-
-
 
 window.mainloop()
