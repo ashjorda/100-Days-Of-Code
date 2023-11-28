@@ -1,24 +1,17 @@
 # Kanye Quote Generator
 
+<img width="200" alt="Screenshot 2023-11-28 at 3 56 47 PM" src="https://github.com/ashjorda/100-Days-Of-Code/assets/40682488/5c43ee75-4098-4580-97d5-0f6e50960a19">
 
 **Description**
 
-The International Space Station Notifier Program is a simple script, that can notify you via email when the ISS is
-close to your longitude/latitude coordinates of your specified location. 
+The Kanye Quote Generator is a proram that generates random Kanye quoutes using the "https://api.kanye.rest/" API endpoint. When you launh the progrma, and click on Kanye's Head. A new quote will appear each time the button with his head on it is pressed. 
 
 **Dependencies**
 
 * requests <br>
-* smtplib (included in Python) <br>
-* datetime (included in Python) <br>
-* time (included in Python) <br>
 
 **Usage**
 
 1. Copy the contents of main.py, save it to a python file locally
 2. Install 'requests' python module
-3. Modify the MY_LAT, and MY_LONG constants with the latitude/longitude coordinates of your specified location. Can use https://www.latlong.net/ to gather your coordinates
-4. Modify the SENDER_EMAIL, SENDER_PASSWORD, and RECIPIENT_EMAIL constants to their respective values. Sender Email, Sender Password, as these are the credentials you want
-to use from your email provider to send the email notification. And the recipient email is the account that you want to receive the notification when the ISS is over head.
-5. Update the smtp address of your email provider on line 60, currently set for gmail smtp address.
-6. Run the python script from CLI or a hosted server. The script will execute every 60 seconds until canceled or an exception is raised
+3. Run the script, and press Kanye's head for a quote of motivation
