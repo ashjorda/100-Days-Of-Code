@@ -4,7 +4,7 @@
 
 **Description**
 
-The Kanye Quote Generator is a proram that generates random Kanye quoutes using the "https://api.kanye.rest/" API endpoint. When you launh the progrma, and click on Kanye's Head. A new quote will appear each time the button with his head on it is pressed. 
+The Kanye Quote Generator is a program that generates random Kanye quotes using the "https://api.kanye.rest/" API endpoint. When you launch the program, and click on Kanye's Head. A new quote will appear each time the button with his head on it is pressed. 
 
 **Dependencies**
 
