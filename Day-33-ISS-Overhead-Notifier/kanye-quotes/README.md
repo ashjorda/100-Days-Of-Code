@@ -15,3 +15,6 @@ The Kanye Quote Generator is a program that generates random Kanye quotes using 
 1. Copy the contents of main.py, save it to a python file locally
 2. Install 'requests' python module
 3. Run the script, and press Kanye's head for a quote of motivation
+
+
+**Note:** This project was a starter project in understanding how to use the requests module in python to perform get request to api endpoints. 
