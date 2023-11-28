@@ -5,9 +5,9 @@ import time
 
 MY_LAT = 32.931049  # Your latitude
 MY_LONG = -96.458649  # Your longitude
-SENDER_EMAIL = "dev.ashton18@gmail.com"
-SENDER_PASSWORD = "bume huws tlsf iqat"
-RECIPIENT_EMAIL = "jen_weeden@yahoo.com"
+SENDER_EMAIL = "user@user.com"
+SENDER_PASSWORD = "sending email password"
+RECIPIENT_EMAIL = "user@user.com"
 
 
 def up_above():
