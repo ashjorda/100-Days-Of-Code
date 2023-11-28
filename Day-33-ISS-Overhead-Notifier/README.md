@@ -5,7 +5,7 @@
 **Description**
 
 The International Space Staation Notifer Program is a simple script, that can notify you via email when the ISS is
-close to your specified location using longitude/latitude coordinates of your sepcified location. 
+close to your longitude/latitude coordinates of your sepcified location. 
 
 **Dependencies**
 
