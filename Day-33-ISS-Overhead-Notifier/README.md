@@ -4,8 +4,8 @@
 
 **Description**
 
-The International Space Staation Notifer Program is a simple script, that can notify you via email when the ISS is
-close to your longitude/latitude coordinates of your sepcified location. 
+The International Space Station Notifier Program is a simple script, that can notify you via email when the ISS is
+close to your longitude/latitude coordinates of your specified location. 
 
 **Dependencies**
 
@@ -16,10 +16,10 @@ close to your longitude/latitude coordinates of your sepcified location.
 
 **Usage**
 
-1. Copy the contents of main.py, save to a python file locally
+1. Copy the contents of main.py, save it to a python file locally
 2. Install 'requests' python module
-3. Modify the MY_LAT, and MY_LONG constants with the latitude/longitude coordinates of your speficiced location. Can use https://www.latlong.net/ to gather your cooridantes
-4. Modify the SENDER_EMAIL, SENDER_PASSWORD, and RECIPIENT_EMAIL constants to their respetive values. Sender Email, and Sender Password combination is the credentails you want
-to use from your email provider to send the email noitifcation. And the recipient email is the account that you want to recieve the notifacation when the ISS is over head.
-5. Update the smtp address of your email provider on line 60, currenlty set for gmail smtp address.
+3. Modify the MY_LAT, and MY_LONG constants with the latitude/longitude coordinates of your specified location. Can use https://www.latlong.net/ to gather your coordinates
+4. Modify the SENDER_EMAIL, SENDER_PASSWORD, and RECIPIENT_EMAIL constants to their respective values. Sender Email, Sender Password, as these are the credentials you want
+to use from your email provider to send the email notification. And the recipient email is the account that you want to receive the notification when the ISS is over head.
+5. Update the smtp address of your email provider on line 60, currently set for gmail smtp address.
 6. Run the python script from CLI or a hosted server. The script will execute every 60 seconds until canceled or an exception is raised
