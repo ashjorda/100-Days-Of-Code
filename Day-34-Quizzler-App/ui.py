@@ -29,12 +29,12 @@ class QuizInterface:
 
         # True (Green Check Mark) button configuration
         true_img_button = PhotoImage(file="./images/true.png")
-        self.true_button = Button(image=true_img_button, highlightthickness=0)
+        self.true_button = Button(image=true_img_button, highlightthickness=0, command=self.true_answer)
         self.true_button.grid(column=0, row=2)
 
         # False (Red Box/white X) button configuration
         false_img_button = PhotoImage(file="./images/false.png")
-        self.false_button = Button(image=false_img_button, highlightthickness=0)
+        self.false_button = Button(image=false_img_button, highlightthickness=0, command=self.false_answer)
         self.false_button.grid(column=1, row=2)
 
         self.get_next_question()
@@ -44,3 +44,9 @@ class QuizInterface:
     def get_next_question(self):
         q_text = self.quiz.next_question()
         self.canvas.itemconfig(self.question_text, text=q_text)
+
+    def true_answer(self):
+        self.quiz.check_answer("True")
+
+    def false_answer(self):
+        self.quiz.check_answer("False")
