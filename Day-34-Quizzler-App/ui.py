@@ -1,11 +1,13 @@
 from tkinter import *
+from quiz_brain import QuizBrain
 
 THEME_COLOR = "#375362"
 
 
 class QuizInterface:
 
-    def __init__(self):
+    def __init__(self, quiz_brain: QuizBrain):
+        self.quiz = quiz_brain
         self.window = Tk()
         self.window.title("Quizzler")
         self.window.config(padx=20, pady=20, bg=THEME_COLOR)
@@ -16,10 +18,11 @@ class QuizInterface:
 
         # Canvas Configuration
         self.canvas = Canvas(width=300, height=250, bg="white", highlightthickness=0)
-        self.timer_text = self.canvas.create_text(
+        self.question_text = self.canvas.create_text(
             150,
             125,
-            text="Amazon acquired Twitch in \nAugust 2014 for $970 million \ndollars.",
+            width=280,
+            text="Some question text!",
             fill=THEME_COLOR,
             font=("Arial", 20, "italic"))
         self.canvas.grid(column=0, row=1, columnspan=2, pady=50)
@@ -34,8 +37,10 @@ class QuizInterface:
         self.false_button = Button(image=false_img_button, highlightthickness=0)
         self.false_button.grid(column=1, row=2)
 
-
-
+        self.get_next_question()
 
         self.window.mainloop()
 
+    def get_next_question(self):
+        q_text = self.quiz.next_question()
+        self.canvas.itemconfig(self.question_text, text=q_text)
