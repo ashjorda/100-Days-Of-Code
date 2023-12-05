@@ -7,14 +7,14 @@ import time
 # email of the ISS overheard notification
 MY_LAT = 46.412830  # Your latitude
 MY_LONG = -1.409850  # Your longitude
-SENDER_EMAIL = "user@user.com"
-SENDER_PASSWORD = "sending email password"
-RECIPIENT_EMAIL = "user@user.com"
+SENDER_EMAIL = "<sender email account>"  # user@gmail.com
+SENDER_PASSWORD = "<sender email account password>"
+RECIPIENT_EMAIL = "<recipient email>"  # recieved@gmail.com
 
 
 # Function gets the long/lat of the ISS via API, and also raises an exception if the api call is not successful.
 # The API response is stored in data. Then parsed for the exact values needed. Then we compare if our long/lat is within
-# 5 degrees of the current ISS long/lat.Then return True if the if statemet checks out.
+# 5 degrees of the current ISS long/lat.Then return True if the statement checks out.
 def iss_overhead():
     response = requests.get(url="http://api.open-notify.org/iss-now.json")
     response.raise_for_status()
@@ -49,6 +49,8 @@ def dark_outside():
     if current_time >= sunset or current_time <= sunrise:
         return True
 
+
+print("Currently watching the Sky's!")
 
 # While loop runs the code every 60 seconds, until stopped by user input or an exception is hit.
 while True:
