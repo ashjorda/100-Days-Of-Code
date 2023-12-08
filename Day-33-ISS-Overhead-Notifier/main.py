@@ -7,9 +7,9 @@ import time
 # email of the ISS overheard notification
 MY_LAT = 46.412830  # Your latitude
 MY_LONG = -1.409850  # Your longitude
-SENDER_EMAIL = "<sender email account>"  # user@gmail.com
-SENDER_PASSWORD = "<sender email account password>"
-RECIPIENT_EMAIL = "<recipient email>"  # recieved@gmail.com
+SENDER_EMAIL = "dev.ashton18@gmail.com"  # user@gmail.com
+SENDER_PASSWORD = "bume huws tlsf iqat"
+RECIPIENT_EMAIL = "jen_weeden@yahoo.com"  # recieved@gmail.com
 
 
 # Function gets the long/lat of the ISS via API, and also raises an exception if the api call is not successful.
