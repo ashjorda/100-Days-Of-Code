@@ -5,9 +5,9 @@ STOCK = "TSLA"
 COMPANY_NAME = "Tesla&nbsp;Inc"
 STOCK_API = "BQA7993Z4CEX0IQ0"
 NEWS_API = "0f642f75fb3449f3a90b478328ec8f9b"
-SENDER_EMAIL = 'dev.ashton18@gmail.com'  # user@gmail.com
-SENDER_PASSWORD = 'bume huws tlsf iqat'
-RECIPIENT_EMAIL = 'jen_weeden@yahoo.com'  # recieved@gmail.com
+SENDER_EMAIL = '<smtp_login'  # user@gmail.com
+SENDER_PASSWORD = '<smtp password>'
+RECIPIENT_EMAIL = '<receiving email>'  # recieved@gmail.com
 header = None
 
 
