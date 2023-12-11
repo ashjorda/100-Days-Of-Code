@@ -31,13 +31,13 @@ Upon using the applicable sections, you can update the following variables in th
 1. Clone the repository:
 
 ```
-copy/download main.py to your project directory
+git clone https://github.com/ashjorda/100-Days-Of-Code.git
 ```
 
 2. Navigate to the project directory:
 
 ```
-cd <project directory>
+cd Day-37-Habit-Tracker
 ```
 
 3. Edit the script and set the required configuration variables.
