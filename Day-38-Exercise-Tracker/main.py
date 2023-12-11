@@ -1,10 +1,10 @@
 import requests
 from datetime import datetime
 
-APP_ID = 'beb58d3e'
-APP_KEY = '14e25e90f3c161ce4b5bbdd054304615'
+APP_ID = 'nutritionix.com api id'
+APP_KEY = '<nutritionix.com api key>'
 API_URL = 'https://trackapi.nutritionix.com/v2/natural/exercise'
-SHEETY_API_URL = 'https://api.sheety.co/c0f6856a82dab9a3b8def4c44041939b/workoutTracking/workouts'
+SHEETY_API_URL = '<sheety api for your specified sheet to update>'
 
 headers = {
     'x-app-id': APP_ID,
@@ -12,7 +12,7 @@ headers = {
 }
 
 exercises_duration = {
-    "query": input("Tell me what exercise you did: ")
+    "query": input("Tell me what exercise(s) you did: ")
 }
 
 send_exercise = requests.post(url=API_URL, headers=headers, json=exercises_duration)
