@@ -15,9 +15,21 @@ Make sure you have the following installed:
 pip install requests smtplib
 ```
 
-## Configuration
+## Usage
 
-Before running the script, you need to set up the following variables in the script:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/ashjorda/100-Days-Of-Code.git
+```
+
+2. Navigate to the project directory:
+
+```bash
+cd Day-36-Stock-News
+```
+
+3. Edit the script and set the required configuration variables:
 
 - `STOCK`: Stock symbol to monitor (e.g., "TSLA").
 - `COMPANY_NAME`: Company name for news retrieval (e.g., "Tesla Inc").
@@ -26,22 +38,6 @@ Before running the script, you need to set up the following variables in the scr
 - `SENDER_EMAIL`: Email address for the sender (SMTP login).
 - `SENDER_PASSWORD`: Password for the sender's email account (SMTP password).
 - `RECIPIENT_EMAIL`: Email address for receiving alerts.
-
-## Usage
-
-1. Clone the repository:
-
-```bash
-download mainy.py to your project directory
-```
-
-2. Navigate to the project directory:
-
-```bash
-cd to your project directory
-```
-
-3. Edit the script and set the required configuration variables.
 
 4. Run the script:
 
