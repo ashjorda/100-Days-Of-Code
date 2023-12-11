@@ -1,52 +1,59 @@
-# Exercise Tracker
+# Exercise Tracking App
 
-This Python script tracks exercise activities using the Nutritionix API and updates a Google Docs Spreadsheet with exercise details.
+This Python script allows you to track your exercises and update a Google Sheet using the Nutritionix API and Sheety API.
 
 ## Prerequisites
 
-Before running the script, ensure you have the following:
+Before running the script, make sure you have the following dependencies installed:
 
-- Python (version 3.x) installed on your machine.
-- Required Python packages: `requests`. You can install it using the following command:
+- [Python](https://www.python.org/) (version 3.6 or higher)
+- [Requests](https://docs.python-requests.org/en/latest/) library
 
-```bash
-pip install requests
-```
+## Installation
+
+1. Clone this repository to your local machine:
+
+    ```bash
+    git clone https://github.com/ashjorda/100-Days-Of-Code.git
+    ```
+
+2. Change into the project directory:
+
+    ```bash
+    cd Day-38-Exercise-Tracker
+    ```
+
+3. Install the required Python packages using pip:
+
+    ```bash
+    pip install requests
+    ```
+
+## Configuration
+
+1. Obtain API keys:
+   - Nutritionix API: [Nutritionix Developer Portal](https://developer.nutritionix.com/)
+   - Sheety API: [Sheety](https://sheety.co/)
+
+2. Replace the placeholder values in the code with your API keys:
+
+    ```python
+    APP_ID = 'your_nutritionix_app_id'
+    APP_KEY = 'your_nutritionix_api_key'
+    SHEETY_API_URL = 'your_sheety_api_url'
+    SHEETY_BEARER = 'your_sheety_bearer_token'
+    ```
 
 ## Usage
 
-1. Clone the repository:
+Run the script by executing the following command:
 
 ```bash
-git clone https://github.com/your-username/exercise-tracker.git
+python main.py
 ```
 
-2. Navigate to the project directory:
+Follow the on-screen prompts to input your exercises and durations. The script will then update the specified Google Sheet with the exercise details.
 
-```bash
-cd exercise-tracker
-```
+**Note**: Make sure to handle your API keys securely and do not share them publicly.
 
-3. Edit the script and set the required configuration variables:
-
-   - `APP_ID`: Your Nutritionix API ID.
-   - `APP_KEY`: Your Nutritionix API key.
-   - `API_URL`: Nutritionix API endpoint for exercise tracking.
-   - `SHEETY_API_URL`: Sheety API endpoint for updating the Google Docs Spreadsheet.
-
-4. Run the script:
-
-```bash
-python exercise_tracker.py
-```
-
-The script will prompt you to input the exercise(s) you did. It will then send this information to the Nutritionix API to retrieve details such as duration and calories burned. Finally, it updates a Google Docs Spreadsheet with the exercise details.
-
-Feel free to customize the script based on your specific needs or integrate it into a larger project.
-
-## Acknowledgments
-
-- The script uses the Nutritionix API for exercise tracking.
-- Google Docs Spreadsheet is updated using the Sheety API.
-
-Happy exercising!
+Feel free to customize the script according to your needs and enjoy tracking your exercises!
