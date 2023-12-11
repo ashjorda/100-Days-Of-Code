@@ -2,7 +2,8 @@
 
 This Python script allows you to track your exercises and update a Google Sheet using the Nutritionix API and Sheety API.
 
-![2020-07-27_14-15-31-e0c90cd01d42f438ce3ba63e548c658f.gif](..%2F..%2F..%2F..%2F..%2F..%2FDownloads%2F2020-07-27_14-15-31-e0c90cd01d42f438ce3ba63e548c658f.gif)
+![2020-07-27_14-15-31](https://github.com/ashjorda/100-Days-Of-Code/assets/40682488/36b63107-82c5-4e51-a566-be1829d0bc4c)
+
 
 ## Prerequisites
 
