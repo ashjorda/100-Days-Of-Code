@@ -42,7 +42,7 @@ header = {
     "Authorization": SHEETY_BEARER
 }
 
-# Formats the Nutritionix JSON response into JSON to be posted to the SHEETY API (Exercise Google Sheet)
+# Formats the Nutritionix JSON response into JSON to be posted to the SHEETY API (Exercise Google Sheet). The key's in the workout dictionary are the values that should corresponde to your google sheet column headers
 exercise_data = {
     "workout": {
         "date": today.strftime("%d/%m/%Y"),
