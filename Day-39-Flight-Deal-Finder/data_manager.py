@@ -10,11 +10,14 @@ class DataManager:
         return data.json()
 
     def city_code_exist(self, data):
+        flight = FlightSearch()
         for _ in data['prices']:
             if len(_['iataCode']) == 0:
+                city_code = flight.city_code(_['city'])
+                _['iataCode'] = city_code
                 body = {
                     "price": {
-                        "iataCode": FlightSearch.city_code(_['city']),
+                        "iataCode": city_code,
                     }
                 }
                 requests.put(url=f"https://api.sheety.co/c0f6856a82dab9a3b8def4c44041939b/flightDeals/prices/{_['id']}",

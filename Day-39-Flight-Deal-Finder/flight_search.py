@@ -1,41 +1,10 @@
 import requests
-from datetime import datetime, timedelta
-from flight_data import FlightData
-
-
-def flight_price(origin_city, destination_city, departure_date, return_date):
-    headers = {
-        'accept': 'application/json',
-        'apikey': 'e32VH4eghtlNc4qOd3jubQAWIZQ5xdWs',
-    }
-    query = {
-        'fly_from': origin_city,
-        'fly_to': destination_city,
-        'date_from': departure_date.strftime('%d/%m/%Y'),
-        'date_to': return_date.strftime('%d/%m/%Y'),
-        'nights_in_dst_from': '7',
-        'nights_in_dst_to': '28',
-        'flight_type': "round",
-        'one_for_cit': '1',
-        'max_stopovers': '0',
-        'curr': 'USD',
-        'vehicle_type': 'aircraft',
-        'locale': 'en',
-    }
-    flight_search_api_url = "https://api.tequila.kiwi.com/v2/search"
-    price_data = requests.get(url=flight_search_api_url, headers=headers, params=query)
-    try:
-        city = price_data.json()['data'][0]['cityTo']
-        price = price_data.json()['data'][0]['price']
-        print(f"{city}: {price}")
-    except IndexError:
-        pass
 
 
 class FlightSearch:
     # This class is responsible for talking to the Flight Search API.
 
-    def city_code(city):
+    def city_code(self, city):
         headers = {'accept': 'application/json', 'apikey': 'e32VH4eghtlNc4qOd3jubQAWIZQ5xdWs'}
         query = {"term": city, "location_types": "city"}
         api_url = 'https://api.tequila.kiwi.com/locations/query'
@@ -43,3 +12,40 @@ class FlightSearch:
         results = response.json()['locations']
         code = results[0]['code']
         return code
+
+    def flight_price(self, origin_city, destination_city, departure_date, return_date, notification_message):
+        headers = {
+            'accept': 'application/json',
+            'apikey': 'e32VH4eghtlNc4qOd3jubQAWIZQ5xdWs',
+        }
+        query = {
+            'fly_from': origin_city,
+            'fly_to': destination_city,
+            'date_from': departure_date.strftime('%d/%m/%Y'),
+            'date_to': return_date.strftime('%d/%m/%Y'),
+            'nights_in_dst_from': '7',
+            'nights_in_dst_to': '28',
+            'flight_type': "round",
+            'one_for_cit': '1',
+            'max_stopovers': '0',
+            'curr': 'USD',
+            'vehicle_type': 'aircraft',
+            'locale': 'en',
+        }
+        flight_search_api_url = "https://api.tequila.kiwi.com/v2/search"
+        flight_data = requests.get(url=flight_search_api_url, headers=headers, params=query)
+        flight_info = flight_data.json()['data'][0]
+        print(flight_info)
+        # try:
+        #     notification_message.append(flight_info['price'])
+        #     notification_message.append(flight_info['cityFrom'])
+        #     notification_message.append(flight_info['flyFrom'])
+        #     notification_message.append(flight_info['cityTo'])
+        #     notification_message.append(flight_info['flyTo'])
+        #     notification_message.append(flight_info['local_departure'])
+        #     notification_message.append(flight_info['local_arrival'])
+        #     # print(f"{city}: {price}")
+        # except IndexError:
+        #     pass
+        # return notification_message
+
