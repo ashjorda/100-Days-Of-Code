@@ -13,7 +13,7 @@ class FlightSearch:
         code = results[0]['code']
         return code
 
-    def flight_price(self, origin_city, destination_city, departure_date, return_date, notification_message):
+    def flight_price(self, origin_city, destination_city, departure_date, return_date):
         headers = {
             'accept': 'application/json',
             'apikey': 'e32VH4eghtlNc4qOd3jubQAWIZQ5xdWs',
@@ -34,18 +34,25 @@ class FlightSearch:
         }
         flight_search_api_url = "https://api.tequila.kiwi.com/v2/search"
         flight_data = requests.get(url=flight_search_api_url, headers=headers, params=query)
-        flight_info = flight_data.json()['data'][0]
-        print(flight_info)
-        # try:
-        #     notification_message.append(flight_info['price'])
-        #     notification_message.append(flight_info['cityFrom'])
-        #     notification_message.append(flight_info['flyFrom'])
-        #     notification_message.append(flight_info['cityTo'])
-        #     notification_message.append(flight_info['flyTo'])
-        #     notification_message.append(flight_info['local_departure'])
-        #     notification_message.append(flight_info['local_arrival'])
-        #     # print(f"{city}: {price}")
-        # except IndexError:
-        #     pass
-        # return notification_message
+        try:
+            flight_info = flight_data.json()['data'][0]
+            price = flight_info['price']
+            city_from = flight_info['cityFrom']
+            fly_from = flight_info['flyFrom']
+            city_to = flight_info['cityTo']
+            fly_to = flight_info['flyTo']
+            local_departure = flight_info['local_departure']
+            local_arrival = flight_info['local_arrival']
 
+            notification_parameters = {'price': price,
+                                       'city_from': city_from,
+                                       'fly_from': fly_from,
+                                       'city_to': city_to,
+                                       'fly_to': fly_to,
+                                       'local_departure': local_departure,
+                                       'local_arrival': local_arrival
+                                       }
+            return notification_parameters
+
+        except IndexError:
+            pass
