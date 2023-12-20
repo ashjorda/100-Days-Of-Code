@@ -14,7 +14,7 @@ destination_list = flight_data.import_data()
 # Check if Data contains city codes for each destination, if not populate them
 flight_data.city_code_exist(destination_list)
 
-# # Check prices of flights from ORIGIN_CITY_IATA to city's listed in destination_list
+# Check prices of flights from ORIGIN_CITY_IATA to city's listed in destination_list
 ORIGIN_CITY_IATA = "DFW"
 tomorrow = datetime.now() + timedelta(days=1)
 six_months_future = tomorrow + timedelta(days=180)

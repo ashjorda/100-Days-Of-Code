@@ -13,9 +13,13 @@ class FlightSearch:
         query = {"term": city, "location_types": "city"}
         api_url = 'https://api.tequila.kiwi.com/locations/query'
         response = requests.get(url=api_url, headers=headers, params=query)
-        results = response.json()['locations']
-        code = results[0]['code']
-        return code
+        try:
+            results = response.json()['locations']
+            code = results[0]['code']
+            return code
+        except KeyError:
+            print(f"{response.json()} Please populate 'self.kiwi_api_key' in settings_vault.py file")
+
 
     def dest_city(self, origin_city, destination_city, departure_date, return_date):
         api_key = self.credentials.kiwi_api_key
