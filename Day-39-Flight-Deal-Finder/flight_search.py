@@ -20,7 +20,6 @@ class FlightSearch:
         except KeyError:
             print(f"{response.json()} Please populate 'self.kiwi_api_key' in settings_vault.py file")
 
-
     def dest_city(self, origin_city, destination_city, departure_date, return_date):
         api_key = self.credentials.kiwi_api_key
         headers = {f'accept': 'application/json', 'apikey': f'{api_key}'}
@@ -40,47 +39,39 @@ class FlightSearch:
         }
         flight_search_api_url = "https://api.tequila.kiwi.com/v2/search"
         flight_data = requests.get(url=flight_search_api_url, headers=headers, params=query)
-        flight_results = flight_data.json()['data']
+
         try:
-            # Flight Info specific to price, and total nights
-            flight_info = flight_results[0]
-            price = flight_info['fare']['adults']
-            nights_in_dest = flight_info['nightsInDest']
+            flight_results = flight_data.json()['data'][0]
+        except IndexError:
+            try:
+                query['max_stopovers'] = 2
+                flight_search_api_url = "https://api.tequila.kiwi.com/v2/search"
+                flight_data = requests.get(url=flight_search_api_url, headers=headers, params=query)
+                flight_results = flight_data.json()['data'][0]
+                notification_parameters = {'nights_in_dest': flight_results['nightsInDest'],
+                                           'price': flight_results['fare']['adults'],
+                                           'depart_city_from': flight_results['route'][0]['cityFrom'],
+                                           'depart_fly_from': flight_results['route'][0]['flyFrom'],
+                                           'depart_city_to': flight_results['route'][1]['cityTo'],
+                                           'depart_fly_to': flight_results['route'][1]['flyTo'],
+                                           'depart_local_departure': flight_results['route'][0]['local_departure'].split("T")[0],
+                                           'depart_local_arrival': flight_results['route'][1]['local_departure'].split("T")[0],
+                                           'layover_city': flight_results['route'][0]['cityTo'],
+                                           'booking_link': flight_results['deep_link'],
+                                           }
+                return notification_parameters
+            except IndexError:
+                pass
 
-            # Flight departure information
-            flight_route_info = flight_results[0]['route'][0]
-            depart_city_from = flight_route_info['cityFrom']
-            depart_fly_from = flight_route_info['flyFrom']
-            depart_city_to = flight_route_info['cityTo']
-            depart_fly_to = flight_route_info['flyTo']
-            depart_local_departure = flight_route_info['local_departure']
-            depart_local_arrival = flight_route_info['local_arrival']
-
-            # Flight return information
-            flight_route_info = flight_results[0]['route'][1]
-            return_city_from = flight_route_info['cityFrom']
-            return_fly_from = flight_route_info['flyFrom']
-            return_city_to = flight_route_info['cityTo']
-            return_fly_to = flight_route_info['flyTo']
-            return_local_departure = flight_route_info['local_departure']
-            return_local_arrival = flight_route_info['local_arrival']
-
-            notification_parameters = {'nights_in_dest': nights_in_dest,
-                                       'price': price,
-                                       'depart_city_from': depart_city_from,
-                                       'depart_fly_from': depart_fly_from,
-                                       'depart_city_to': depart_city_to,
-                                       'depart_fly_to': depart_fly_to,
-                                       'depart_local_departure': depart_local_departure,
-                                       'depart_local_arrival': depart_local_arrival,
-                                       'return_city_from': return_city_from,
-                                       'return_fly_from': return_fly_from,
-                                       'return_city_to': return_city_to,
-                                       'return_fly_to': return_fly_to,
-                                       'return_local_departure': return_local_departure,
-                                       'return_local_arrival': return_local_arrival,
+        else:
+            notification_parameters = {'nights_in_dest': flight_results['nightsInDest'],
+                                       'price': flight_results['fare']['adults'],
+                                       'depart_city_from': flight_results['route'][0]['cityFrom'],
+                                       'depart_fly_from': flight_results['route'][0]['flyFrom'],
+                                       'depart_city_to': flight_results['route'][0]['cityTo'],
+                                       'depart_fly_to': flight_results['route'][0]['flyTo'],
+                                       'depart_local_departure': flight_results['route'][0]['local_departure'].split("T")[0],
+                                       'depart_local_arrival': flight_results['route'][1]['local_departure'].split("T")[0],
+                                       'booking_link': flight_results['deep_link'],
                                        }
             return notification_parameters
-
-        except IndexError:
-            pass

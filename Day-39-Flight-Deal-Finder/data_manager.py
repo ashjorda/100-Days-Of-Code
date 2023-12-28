@@ -9,6 +9,11 @@ class DataManager:
         data = requests.get(url=api_url)
         return data.json()
 
+    def import_members(self):
+        api_url = 'https://api.sheety.co/c0f6856a82dab9a3b8def4c44041939b/flightDeals/users'
+        data = requests.get(url=api_url)
+        return data.json()
+
     def city_code_exist(self, data):
         flight = FlightSearch()
         for _ in data['prices']:
