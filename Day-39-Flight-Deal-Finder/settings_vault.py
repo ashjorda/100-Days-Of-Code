@@ -1,9 +1,12 @@
 class Settings:
     # This class is responsible for structuring the flight data.
+
     def __init__(self):
-        self.kiwi_api_key = ''
-        self.send_email = ''  # smtp login
-        self.send_password = ''  # smtp password
-        self.recipient_email = ''  # recipient email
-        self.smtp_server = 'smtp.gmail.com'  # gmail smtp server or your email smtp server url
-        self.smtp_port = '587'  # currently set to googles secure smtp port
+        # Initialize Settings with default values (empty strings) and configuration details
+        self.kiwi_api_key = ''  # API key for the Kiwi Flight Search API
+        self.flight_destinations = ''  # Sheetly API URL for "prices" tab in the Google sheet
+        self.email_list = ''  # Sheetly API URL for "users" tab in the Google sheet
+        self.send_email = ''  # user@gmail.com
+        self.send_password = ''  # SMTP server password
+        self.smtp_server = 'smtp.gmail.com'  # SMTP server URL (default is Gmail)
+        self.smtp_port = '587'  # SMTP port for secure communication (default for Gmail)
