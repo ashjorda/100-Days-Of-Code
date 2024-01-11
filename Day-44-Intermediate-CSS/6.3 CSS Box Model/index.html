@@ -6,16 +6,49 @@
   <title>CSS Box Model</title>
   <style>
     /* Write your CSS code here */
+    div {
+      height: 200px;
+      width: 200px;
+    }
 
+    p {
+      margin: 0px;
+    }
+
+    #div1  {
+      border: 10px solid black;
+      background-color: cadetblue;
+      padding: 20px;
+    }
+
+    #div2  {
+      margin-left: 260px;
+      border: solid black;
+      border-width: 20px 10px;
+      background-color: gold;
+      border: 20px, ;
+    }
+    
+    #div3  {
+      margin-left: 40px;
+      border: 10px solid black;
+      background-color: indianred;
+    }
   </style>
 </head>
 
 <body>
 
+  <div id=div1>
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sapien porttitor urna elementum lacinia. In
+      id magna pulvinar, ultricies lorem id, vehicula elit. Aliquam eu luctus nisl, vitae pellentesque magna. Phasellus
+      dolor metus, laoreet ac convallis sit amet, efficitur sed dolor.</p>
+  </div>
+  <div id=div2></div>
+  <div id=div3></div>
 
   <!-- TODOs:
 1. Create 3 Boxes using the div element.
-2. Set their sizes to 200px heigh by 200px wide.
 3. Set different background colors for each of the boxes (I used cadetblue, gold and indianred).
 4. Add a paragraph <p> element into the first div and add the following words:
     Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam at sapien porttitor urna elementum lacinia. In
