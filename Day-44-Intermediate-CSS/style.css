@@ -3,14 +3,8 @@ html {
 }
 
 h1 {
-    color: white;
-    background-color: black;
     text-transform: uppercase;
-}
-
-p {
-    color: white;
-    background-color: black;  
+    font-size: 3rem;
 }
 
 img {
@@ -19,15 +13,11 @@ img {
     width: 100%;
 }
 
-.libre-baskerville-regular {
-    font-family: "Libre Baskerville", serif;
-    font-weight: 400;
-    font-style: normal;
-  }
-
 div {
+    font-family: "Libre Baskerville", serif;
     width: 50%;
+    color: white;
     margin-left: 25%;
-    margin-top: 15%;
+    margin-top: 100px;
     text-align: center;
 }
