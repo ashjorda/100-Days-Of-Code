@@ -1,10 +1,47 @@
 from bs4 import BeautifulSoup
+import requests
+
+# Grabs the contents of the requested website
+website = requests.get("https://news.ycombinator.com/news")
+
+# Stores the website HTML in the contents variable
+contents = website.text
+
+# Loads the website html into BS for parsing
+soup = BeautifulSoup(contents, "html.parser")
+
+# Saves the first Article tittle, link, and up votes in the below variables, and prints to screen
+first_article = soup.find(name="span", class_="titleline")
+article_tag = first_article.find(name="a")
+article_text = article_tag.get_text()
+article_link = article_tag.get("href")
+article_upvote = soup.find(name="span", class_="score").get_text()
+print(article_text)
+print(article_link)
+print(article_upvote)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # import lxml
 
-with open("website.html") as file:
-    contents = file.read()
+# with open("website.html") as file:
+#     contents = file.read()
 
-soup = BeautifulSoup(contents, "html.parser")
 # print(soup.title)
 # print(soup.title.string)
 
@@ -12,7 +49,7 @@ soup = BeautifulSoup(contents, "html.parser")
 
 # print(soup.p)
 
-# Finds all the tags by name, and stores thim in a list in the variable
+# Finds all the tags by name, and stores them in a list in the variable
 # all_anchor_tags = soup.find_all(name="a")
 # print(all_anchor_tags)
 
@@ -36,9 +73,9 @@ soup = BeautifulSoup(contents, "html.parser")
 # print(company_url)
 
 # Allows the selection of an css id by name
-name = soup.select_one("#name")
-print(name)
-
-# Allows for the selection of a class heading
-headings = soup.select_one(".heading")
-print(headings)
+# name = soup.select_one("#name")
+# print(name)
+#
+# # Allows for the selection of a class heading
+# headings = soup.select_one(".heading")
+# print(headings)
