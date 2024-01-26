@@ -32,5 +32,13 @@ soup = BeautifulSoup(contents, "html.parser")
 # section_heading = soup.find(name="h3", class_="heading")
 # print(section_heading)
 
-company_url = soup.select_one(selector="p a")
-print(company_url)
+# company_url = soup.select_one(selector="p a")
+# print(company_url)
+
+# Allows the selection of an css id by name
+name = soup.select_one("#name")
+print(name)
+
+# Allows for the selection of a class heading
+headings = soup.select_one(".heading")
+print(headings)
