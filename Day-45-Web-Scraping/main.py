@@ -10,15 +10,24 @@ contents = website.text
 # Loads the website html into BS for parsing
 soup = BeautifulSoup(contents, "html.parser")
 
-# Saves the first Article tittle, link, and up votes in the below variables, and prints to screen
-first_article = soup.find(name="span", class_="titleline")
-article_tag = first_article.find(name="a")
-article_text = article_tag.get_text()
-article_link = article_tag.get("href")
-article_upvote = soup.find(name="span", class_="score").get_text()
-print(article_text)
-print(article_link)
-print(article_upvote)
+#  Creates two empty list to contain the article titles, and associated links. Then loops through all titles
+# and links and appends them to the empty list.
+
+article_titles = []
+article_links = []
+
+for articles in soup.find_all(name="span", class_="titleline"):
+    article = articles.find(name="a")
+    article_titles.append(article.get_text())
+    article_links.append(article.get("href"))
+
+# Perform list comprehension to extract the scores for each article from the above operation
+article_upvote = [int(score.getText().split()[0]) for score in soup.find_all(name="span", class_="score")]
+
+# Print the top voted article, and it's link based the highest score of the articles of the day.
+print(article_titles[article_upvote.index(max(article_upvote))])
+print(article_links[article_upvote.index(max(article_upvote))])
+# print(article_upvote)
 
 
 
