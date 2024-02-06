@@ -8,7 +8,7 @@ track_uris = []
 user_id = ""
 
 travel_week = input("Which week do you want to travel to? Type the date in the following format: YYYY-MM-DD: ")
-travel_year = travel_week.split("-")[0]
+# travel_year = travel_week.split("-")[0]
 
 
 # Grabs the contents of the requested website
@@ -37,7 +37,7 @@ for song_name in soup.find_all(name="h3",
 
 # Spotify Oauth Flow
 scope = "playlist-modify-private playlist-read-private"
-sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="<client id>",
+sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="<clientid goes here>",
                                                client_secret="<client secret goes here>",
                                                redirect_uri='http://example.com', scope=scope))
 
@@ -45,12 +45,13 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(client_id="<client id>",
 user_id = sp.current_user()["id"]
 
 
+# Check to ensure the playlist to be created does not already exist.
 def existing_playlist_check():
     existing_users_playlist = sp.user_playlists(user_id)
     length = len(existing_users_playlist['items'])
     existing_playlist = [existing_users_playlist['items'][playlist]['name'] for playlist in range(length)]
-    if f'{travel_year} Billboard 100' in existing_playlist:
-        print(f"Can't create playlist, as {travel_year} Billboard 100 playlist already exist")
+    if f'{travel_week} Billboard 100' in existing_playlist:
+        print(f"Can't create playlist, as {travel_week} Billboard 100 playlist already exist")
     else:
         print("Doing the search, and creating your playlist!!!!! :-)")
         spotify_track_search(song_titles)
@@ -69,9 +70,9 @@ def spotify_track_search(song_list):
 
 # Creates the playlist on Spotify, using the track uris stored in the list "track_uris"
 def create_playlist():
-    playlist_creation = sp.user_playlist_create(user_id, f'{travel_year} Billboard 100', public=False,
+    playlist_creation = sp.user_playlist_create(user_id, f'{travel_week} Billboard 100', public=False,
                                                 collaborative=False,
-                                                description=f'Top Billboard 100 songs for the year {travel_year}')
+                                                description=f'Top Billboard 100 songs for the week of {travel_week}')
     add_tracks = sp.playlist_add_items(playlist_creation['id'], track_uris)
     print("Playlist created successfully!")
 
