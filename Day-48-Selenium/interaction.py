@@ -8,8 +8,8 @@ chrome_options.add_experimental_option("detach", True)
 driver = webdriver.Chrome(options=chrome_options)
 driver.get("https://en.wikipedia.org/wiki/Main_Page")
 
-total_articles = driver.find_element(By.ID, 'articlecount')
+article_count = driver.find_element(By.CSS_SELECTOR, '#articlecount a')
 
-print(total_articles.text.split(' ')[0])
+print(article_count.text)
     
 driver.quit()
