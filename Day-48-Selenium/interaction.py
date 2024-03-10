@@ -16,11 +16,11 @@ driver.get("https://en.wikipedia.org/wiki/Main_Page")
 # print(article_count.text)
     
 # Find element by Link Text
-all_portals = driver.find_element(By.LINK_TEXT, value="Content portals")
-# all_portals.click()
+# all_portals = driver.find_element(By.LINK_TEXT, value="Content portals")
+# # all_portals.click()
 
 # Find the "Search" <input> by Name
 search = driver.find_element(By.NAME, value="search")
 
-# Sending keyboard  input to Selenium
+# # Sending keyboard  input to Selenium
 search.send_keys("Python", Keys.ENTER)
