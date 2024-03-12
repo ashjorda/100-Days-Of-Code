@@ -22,7 +22,33 @@ driver.get("http://orteil.dashnet.org/experiments/cookie/")
 # email = driver.find_element(By.NAME, value="email")
 # email.send_keys("jdough@gmail.com")
 
-# Click the submit 
+# Click the submit
+seconds = 0
+minutes = 0
+cps = driver.find_element(By.CSS_SELECTOR, value='#cps')
+print(cps.text)
+
 while True:
-    click_cookie = driver.find_element(By.CSS_SELECTOR, value='#cookie')
-    click_cookie.click()
+    if seconds != 4: 
+        click_cookie = driver.find_element(By.CSS_SELECTOR, value='#cookie')
+        click_cookie.click()
+        seconds +=1
+        minutes += 1
+    elif seconds == 4:
+        money = driver.find_element(By.CSS_SELECTOR, value='#money')
+        store = driver.find_elements(By.CSS_SELECTOR, "#store div b")
+        cookies = int(money.text)
+        afford = {}
+        for items in store:
+            if len(items.text) > 0:
+                if cookies >= int(items.text.split('- ')[1].replace(',', '')):
+                    afford[f"buy{items.text.split('-')[0]}"] =  int(items.text.split('- ')[1].replace(',', ''))
+        if not bool(afford) != True:
+            buy_expensive_item = max(zip(afford.values(), afford.keys()))[1]
+            buy_button = driver.find_element(By.CSS_SELECTOR, value=f'#{buy_expensive_item}')
+            buy_button.click()
+        seconds = 0
+        minutes += 1
+print(f"Cookies/Second: {cps.text}")
+
+
