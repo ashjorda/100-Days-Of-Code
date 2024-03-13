@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
 # Keep Chrome browser open after program finishes
 chrome_options = webdriver.ChromeOptions()
@@ -24,16 +25,16 @@ driver.get("http://orteil.dashnet.org/experiments/cookie/")
 
 # Click the submit
 seconds = 0
-minutes = 0
 cps = driver.find_element(By.CSS_SELECTOR, value='#cps')
-print(cps.text)
 
-while True:
+start_time = time.time()
+elapsed_time = 0
+
+while elapsed_time < 5 * 60:
     if seconds != 4: 
         click_cookie = driver.find_element(By.CSS_SELECTOR, value='#cookie')
         click_cookie.click()
         seconds +=1
-        minutes += 1
     elif seconds == 4:
         money = driver.find_element(By.CSS_SELECTOR, value='#money')
         store = driver.find_elements(By.CSS_SELECTOR, "#store div b")
@@ -48,7 +49,9 @@ while True:
             buy_button = driver.find_element(By.CSS_SELECTOR, value=f'#{buy_expensive_item}')
             buy_button.click()
         seconds = 0
-        minutes += 1
+    current_time = time.time()
+    elapsed_time = current_time - start_time
 print(f"Cookies/Second: {cps.text}")
+driver.quit()
 
 
