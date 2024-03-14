@@ -56,3 +56,4 @@ while True:
         print(f"Cookies/Second: {cps.text}")
         break
 
+driver.quit()
