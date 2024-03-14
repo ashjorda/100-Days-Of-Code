@@ -30,7 +30,7 @@ cps = driver.find_element(By.CSS_SELECTOR, value='#cps')
 start_time = time.time()
 elapsed_time = 0
 
-while elapsed_time < 5 * 60:
+while True:
     if seconds != 4: 
         click_cookie = driver.find_element(By.CSS_SELECTOR, value='#cookie')
         click_cookie.click()
@@ -51,7 +51,8 @@ while elapsed_time < 5 * 60:
         seconds = 0
     current_time = time.time()
     elapsed_time = current_time - start_time
-print(f"Cookies/Second: {cps.text}")
-driver.quit()
 
+    if elapsed_time < 5 * 60:
+        print(f"Cookies/Second: {cps.text}")
+        break
 
