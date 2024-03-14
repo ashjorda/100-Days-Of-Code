@@ -8,22 +8,8 @@ chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
 
-# Signup for the LAB report
 driver.get("http://orteil.dashnet.org/experiments/cookie/")
 
-# # Enter First Name on the form
-# fname = driver.find_element(By.NAME, value="fName")
-# fname.send_keys("John")
-
-# # Enter Last Name in the form
-# lname = driver.find_element(By.NAME, value="lName")
-# lname.send_keys("Dough")
-
-# # Enter email address in the form
-# email = driver.find_element(By.NAME, value="email")
-# email.send_keys("jdough@gmail.com")
-
-# Click the submit
 seconds = 0
 cps = driver.find_element(By.CSS_SELECTOR, value='#cps')
 
