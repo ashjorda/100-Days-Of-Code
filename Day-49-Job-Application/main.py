@@ -1,5 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+import time
 
 # Keep Chrome browser open after program finishes
 chrome_options = webdriver.ChromeOptions()
@@ -13,5 +14,6 @@ driver.get("https://www.linkedin.com/jobs/search/?f_LF=f_AL&geoId=102257491&keyw
 sign_in = driver.find_element(By.CLASS_NAME, value="btn-secondary-emphasis")
 sign_in.click()
 
-
+# Wait 3 seconds before entering the login credentials
+time.sleep(3)
 
