@@ -14,6 +14,16 @@ driver.get("https://www.linkedin.com/jobs/search/?f_LF=f_AL&geoId=102257491&keyw
 sign_in = driver.find_element(By.CLASS_NAME, value="btn-secondary-emphasis")
 sign_in.click()
 
-# Wait 3 seconds before entering the login credentials
+# Wait 5 seconds before entering the login credentials
 time.sleep(3)
 
+# # Enter Username
+username = driver.find_element(By.ID, value="username")
+username.send_keys("dev.linkedin6@gmail.com")
+
+# Enter Password
+password = driver.find_element(By.ID, value="password")
+password.send_keys("BE.mature.2018")
+
+click_sign_in = driver.find_element(By.CLASS_NAME, value="btn__primary--large ")
+click_sign_in.click()
