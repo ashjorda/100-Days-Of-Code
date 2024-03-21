@@ -36,3 +36,5 @@ time.sleep(3) # Wait 3 seconds before clicking the sign in button
 # Click the save button
 click_save = driver.find_element(By.CLASS_NAME, value="jobs-save-button")
 click_save.click()
+
+#Complete
