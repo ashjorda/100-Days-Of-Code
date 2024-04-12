@@ -5,7 +5,7 @@ import time
 
 PROMISED_DOWN = 150
 PROMISED_UP = 10
-TWITTER_EMAIL = "ashton.jordan@gmail.com"
+TWITTER_EMAIL = "YOUR EMAIL"
 TWITTER_PASSWORD = "YOUR PASSWORD"
 
 chrome_options = webdriver.ChromeOptions()
