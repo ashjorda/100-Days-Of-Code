@@ -32,10 +32,11 @@ class InternetSpeedTwitterBot:
         self.driver.quit()
 
     def tweet_at_provider(self):
-        if self.down < 150 and self.up < PROMISED_UP:
-            message = f"Hey Internet Provider, why is my internet speed {self.down}down/{self.up}up when I pay for {PROMISED_DOWN}down/{PROMISED_UP}up?"
-            driver = webdriver.Chrome(options=chrome_options)
-            driver.get("https://twitter.com/")
+        pass
+        # if self.down < 150 and self.up < PROMISED_UP:
+        #    message = f"Hey Internet Provider, why is my internet speed {self.down}down/{self.up}up when I pay for {PROMISED_DOWN}down/{PROMISED_UP}up?"
+        #    driver = webdriver.Chrome(options=chrome_options)
+        #    driver.get("https://twitter.com/")
 
 bot = InternetSpeedTwitterBot()
 bot.get_internet_speed()
