@@ -25,14 +25,24 @@ chrome_options.add_experimental_option("detach", True)
 
 driver = webdriver.Chrome(options=chrome_options)
 
-driver.get("https://docs.google.com/forms/d/e/1FAIpQLScqwyl9a4WW8jBrjc0-Qu5Z77cOjMtkcsyvoBOr2IY76yfoFg/viewform?usp=sf_link")
+for rental in range(len(property_address)):
+    driver.get("https://docs.google.com/forms/d/e/1FAIpQLScqwyl9a4WW8jBrjc0-Qu5Z77cOjMtkcsyvoBOr2IY76yfoFg/viewform?usp=sf_link")
+    time.sleep(2)
 
-# Enter Property Address
-form_address = driver.find_element(By.CLASS_NAME, value="Xb9hP")
-form_address.send_keys(property_address[0])
+    # Enter Property Address
+    address = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[1]/div/div/div[2]/div/div[1]/div/div[1]/input')
+    address.send_keys(property_address[rental])
 
-# time.sleep(3) # Wait 3 seconds before clicking the sign in button
+    # Enter Property Price
+    price = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[1]/input')
+    price.send_keys(property_prices[rental])
 
-# Click the sign in button
-# click_sign_in = driver.find_element(By.CLASS_NAME, value="btn__primary--large ")
-# click_sign_in.click()
+    # Enter Property Link
+    link = driver.find_element(By.XPATH, '//*[@id="mG61Hd"]/div[2]/div/div[2]/div[3]/div/div/div[2]/div/div[1]/div/div[1]/input')
+    link.send_keys(property_listing[rental])
+
+    time.sleep(1) # Wait 2 seconds before clicking the sign in button
+
+    # Click the sign in button
+    click_sign_in = driver.find_element(By.XPATH, value='//*[@id="mG61Hd"]/div[2]/div/div[3]/div[1]/div[1]/div/span/span')
+    click_sign_in.click()
