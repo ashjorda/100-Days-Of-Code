@@ -12,5 +12,11 @@ def home():
     return render_template("index.html", num=random_number, year=copyright_year)
 
 
+@app.route('/guess/<string:name>')
+def guess(name):
+    upper_name = name.title()
+    return render_template("guess.html", user=upper_name)
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=8001)
