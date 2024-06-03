@@ -15,6 +15,16 @@ def agify(name):
         return age.status_code
 
 
+def genderize(name):
+    """Function that takes name as an input, and using the genderize.io api to return a guessed gender"""
+    api_url = f"https://api.genderize.io/?name={name}&country_id=US"
+    gender = requests.get(api_url)
+    if gender.status_code == 200:
+        return gender.json()['gender']
+    else:
+        return gender.status_code
+
+
 @app.route('/')
 def home():
     random_number = random.randint(1, 10)
@@ -26,7 +36,8 @@ def home():
 def guess(name):
     upper_name = name.title()
     guessed_age = agify(name)
-    return render_template("guess.html", user=upper_name, age=guessed_age)
+    guessed_gender = genderize(name)
+    return render_template("guess.html", user=upper_name, age=guessed_age, gender=guessed_gender)
 
 
 if __name__ == "__main__":
