@@ -28,6 +28,8 @@ def genderize(name):
 
 @app.route('/')
 def home():
+    """default route renders index.html with a random number, dynamic copyright year, and python expression within the
+     index.html template file"""
     random_number = random.randint(1, 10)
     copyright_year = datetime.datetime.now().year
     return render_template("index.html", num=random_number, year=copyright_year)
