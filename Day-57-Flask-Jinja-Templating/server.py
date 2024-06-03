@@ -7,6 +7,7 @@ app = Flask(__name__)
 
 
 def agify(name):
+    """Function that takes name as an input, and using the agify.io api to return a guessed age"""
     api_url = f"https://api.agify.io/?name={name}&country_id=US"
     age = requests.get(api_url)
     if age.status_code == 200:
