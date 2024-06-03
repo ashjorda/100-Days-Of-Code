@@ -17,7 +17,17 @@ def home():
 
 @app.route('/post/<int:num>')
 def blog_post(num):
-    return render_template("post.html", )
+    print(num)
+    blogs_url = "https://api.npoint.io/c790b4d5cab58020d391"
+    response = requests.get(blogs_url)
+    if response.status_code == 200:
+        blogs_post = response.json()[num]
+        blog_title = blogs_post['title']
+        blog_subtitle = blogs_post['subtitle']
+        blog_body = blogs_post['body']
+        return render_template("post.html", title=blog_title, subtitle=blog_subtitle, body=blog_body)
+    else:
+        return render_template("index.html")
 
 
 if __name__ == "__main__":
