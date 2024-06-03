@@ -35,6 +35,8 @@ def home():
 
 @app.route('/guess/<string:name>')
 def guess(name):
+    """Route that takes the string from the appended url, and renders guess.html
+    with title case name, guessed age, and gender"""
     upper_name = name.title()
     guessed_age = agify(name)
     guessed_gender = genderize(name)
