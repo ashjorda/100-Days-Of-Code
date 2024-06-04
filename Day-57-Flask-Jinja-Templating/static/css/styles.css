@@ -69,8 +69,3 @@ footer {
   color: white;
   text-align: center;
 }
-
-.title h1 a {
-    color: white;
-    text-decoration: none; /* Optional: Removes the underline from links */
-}
