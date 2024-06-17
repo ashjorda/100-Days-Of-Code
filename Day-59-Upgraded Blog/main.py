@@ -21,5 +21,11 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route('/post/<int:id>')
+def post(id):
+    print(id)
+    return render_template("post.html")
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5000)

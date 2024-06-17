@@ -19,14 +19,14 @@
                     <!-- Post preview-->
                     {% for blog in blogs %}
                     <div class="post-preview">
-                        <a href="post.html">
+                        <a href="{{ url_for('post', id=blog.id) }}">
                             <h2 class="post-title">{{ blog.title }}</h2>
                             <h3 class="post-subtitle">{{ blog.subtitle }}</h3>
                         </a>
                         <p class="post-meta">
                             Posted by
-                            <a href="#!">{{ blog.author }}</a>
-                            on {{ blog.dates }}
+                            <a href="#">Ashton Jordan</a>
+                            on June 17th, 2024
                         </p>
                     </div>
                     <!-- Divider-->
