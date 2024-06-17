@@ -3,12 +3,12 @@ import requests
 
 app = Flask(__name__)
 
+blog_post = requests.get("https://api.npoint.io/674f5423f73deab1e9a7").json()
+
 
 @app.route('/')
 def index():
-    blog_post = requests.get("https://api.npoint.io/674f5423f73deab1e9a7")
-    blogs = blog_post.json()
-    return render_template("index.html", blogs=blogs)
+    return render_template("index.html", blogs=blog_post)
 
 
 @app.route('/about')
@@ -23,7 +23,6 @@ def contact():
 
 @app.route('/post/<int:id>')
 def post(id):
-    print(id)
     return render_template("post.html")
 
 
