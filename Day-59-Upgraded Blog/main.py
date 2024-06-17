@@ -23,6 +23,8 @@ def contact():
 
 @app.route('/post/<int:id>')
 def post(id):
+    blog = blog_post[id-1]
+    print(blog)
     return render_template("post.html")
 
 
