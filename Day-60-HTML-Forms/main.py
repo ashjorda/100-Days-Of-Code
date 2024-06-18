@@ -22,6 +22,11 @@ def contact():
     return render_template("contact.html")
 
 
+@app.route("/form-entry")
+def receive_data():
+    pass
+
+
 @app.route("/post/<int:index>")
 def show_post(index):
     requested_post = None
