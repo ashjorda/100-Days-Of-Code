@@ -22,12 +22,8 @@ def contact():
     if request.method == 'GET':
         return render_template("contact.html")
     if request.method == 'POST':
-        name = request.form['name']
-        email = request.form['email']
-        phone = request.form['phone']
-        message = request.form['message']
-        print(f"{name} \n{email} \n{phone} \n{message}")
-        return "<H1>Successfully sent your message</H1>"
+        message = "Successfully sent your message"
+        return render_template("contact.html", message=message)
 
 
 @app.route("/post/<int:index>")
