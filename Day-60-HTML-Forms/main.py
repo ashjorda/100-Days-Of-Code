@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request
 import requests
+import smtplib
 
 # USE YOUR OWN npoint LINK! ADD AN IMAGE URL FOR YOUR POST. 👇
 posts = requests.get("https://api.npoint.io/c790b4d5cab58020d391").json()
@@ -19,9 +20,25 @@ def about():
 
 @app.route("/contact", methods=["POST", "GET"])
 def contact():
+    sender_email = "user@mail.com"
+    sender_password = "smtp password"
+    recipient_email = "receiver@mail.com"
+
     if request.method == 'GET':
         return render_template("contact.html")
     if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        message = request.form['message']
+
+        with smtplib.SMTP("smtp.gmail.com", port=587) as connection:
+            connection.starttls()
+            connection.login(user=sender_email, password=sender_password)
+            connection.sendmail(from_addr=sender_email,
+                                to_addrs=recipient_email,
+                                msg=f"Subject:New Message\n\n{name} \n{email} \n{phone} \n{message}"
+                                )
         message = "Successfully sent your message"
         return render_template("contact.html", message=message)
 
