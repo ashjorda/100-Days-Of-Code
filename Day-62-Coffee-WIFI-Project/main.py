@@ -1,8 +1,8 @@
 from flask import Flask, render_template
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
-from wtforms.validators import DataRequired
+from wtforms import StringField, SubmitField, SelectField
+from wtforms.validators import DataRequired, URL
 import csv
 
 '''
@@ -25,6 +25,12 @@ Bootstrap5(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField('Cafe name', validators=[DataRequired()])
+    location = StringField('Cafe Location on Google Maps (URL)', validators=[URL(message="Invalid URL")])
+    open_time = StringField('Opening Time e.g. 8AM', validators=[DataRequired()])
+    close_time = StringField('Closing Time e.g. 5:30PM', validators=[DataRequired()])
+    coffee_rating = SelectField('Coffee Rating', choices=[('1', '☕️'), ('2', '☕️☕️'), ('3', '☕️☕️☕️'), ('4', '☕️☕️☕️☕️'), ('5', '☕️☕️☕️☕️☕️')], validators=[DataRequired()])
+    wifi_strength = SelectField('Wifi Strength Rating', choices=[('0', '✘'), ('1', '💪'), ('2', '💪💪'), ('3', '💪💪💪'), ('4', '💪💪💪💪'), ('5', '💪💪💪💪💪')], validators=[DataRequired()])
+    power_socket = SelectField('Power Socket Availability', choices=[('0', '✘'), ('1', '🔌'), ('2', '🔌🔌'), ('3', '🔌🔌🔌'), ('4', '🔌🔌🔌🔌'), ('5', '🔌🔌🔌🔌')], validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 # Exercise:
@@ -64,4 +70,4 @@ def cafes():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8001)
