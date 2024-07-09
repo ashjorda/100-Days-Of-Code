@@ -30,14 +30,14 @@ class CafeForm(FlaskForm):
     open_time = StringField('Opening Time e.g. 8AM', validators=[DataRequired()])
     close_time = StringField('Closing Time e.g. 5:30PM', validators=[DataRequired()])
     coffee_rating = SelectField('Coffee Rating',
-                                choices=[('1', '☕️'), ('2', '☕️☕️'), ('3', '☕️☕️☕️'), ('4', '☕️☕️☕️☕️'),
-                                         ('5', '☕️☕️☕️☕️☕️')])
+                                choices=['☕️', '☕️☕️', '☕️☕️☕️', '☕️☕️☕️☕️',
+                                         '☕️☕️☕️☕️☕️'])
     wifi_strength = SelectField('Wifi Strength Rating',
-                                choices=[('0', '✘'), ('1', '💪'), ('2', '💪💪'), ('3', '💪💪💪'), ('4', '💪💪💪💪'),
-                                         ('5', '💪💪💪💪💪')])
+                                choices=['✘', '💪', '💪💪', '💪💪💪', '💪💪💪💪',
+                                         '💪💪💪💪💪'])
     power_socket = SelectField('Power Socket Availability',
-                               choices=[('0', '✘'), ('1', '🔌'), ('2', '🔌🔌'), ('3', '🔌🔌🔌'), ('4', '🔌🔌🔌🔌'),
-                                        ('5', '🔌🔌🔌🔌')])
+                               choices=['✘', '🔌', '🔌🔌', '🔌🔌🔌', '🔌🔌🔌🔌',
+                                        '🔌🔌🔌🔌'])
     submit = SubmitField('Submit')
 
 
@@ -61,6 +61,7 @@ def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
         with open('cafe-data.csv', 'a', newline='',) as new_entry:
+            print(form.coffee_rating.data)
             csv_writer = csv.writer(new_entry)
             csv_writer.writerow([form.cafe.data, form.location.data, form.open_time.data, form.close_time.data, form.coffee_rating.data, form.wifi_strength.data, form.power_socket.data])
         return redirect(url_for('cafes'))
