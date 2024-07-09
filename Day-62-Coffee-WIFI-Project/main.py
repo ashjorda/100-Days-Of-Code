@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, redirect, url_for
 from flask_bootstrap import Bootstrap5
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, SelectField
@@ -25,13 +25,21 @@ Bootstrap5(app)
 
 class CafeForm(FlaskForm):
     cafe = StringField('Cafe name', validators=[DataRequired()])
-    location = StringField('Cafe Location on Google Maps (URL)', validators=[DataRequired(), URL(message="Invalid URL")])
+    location = StringField('Cafe Location on Google Maps (URL)',
+                           validators=[DataRequired(), URL(message="Invalid URL")])
     open_time = StringField('Opening Time e.g. 8AM', validators=[DataRequired()])
     close_time = StringField('Closing Time e.g. 5:30PM', validators=[DataRequired()])
-    coffee_rating = SelectField('Coffee Rating', choices=[('1', '☕️'), ('2', '☕️☕️'), ('3', '☕️☕️☕️'), ('4', '☕️☕️☕️☕️'), ('5', '☕️☕️☕️☕️☕️')])
-    wifi_strength = SelectField('Wifi Strength Rating', choices=[('0', '✘'), ('1', '💪'), ('2', '💪💪'), ('3', '💪💪💪'), ('4', '💪💪💪💪'), ('5', '💪💪💪💪💪')])
-    power_socket = SelectField('Power Socket Availability', choices=[('0', '✘'), ('1', '🔌'), ('2', '🔌🔌'), ('3', '🔌🔌🔌'), ('4', '🔌🔌🔌🔌'), ('5', '🔌🔌🔌🔌')])
+    coffee_rating = SelectField('Coffee Rating',
+                                choices=[('1', '☕️'), ('2', '☕️☕️'), ('3', '☕️☕️☕️'), ('4', '☕️☕️☕️☕️'),
+                                         ('5', '☕️☕️☕️☕️☕️')])
+    wifi_strength = SelectField('Wifi Strength Rating',
+                                choices=[('0', '✘'), ('1', '💪'), ('2', '💪💪'), ('3', '💪💪💪'), ('4', '💪💪💪💪'),
+                                         ('5', '💪💪💪💪💪')])
+    power_socket = SelectField('Power Socket Availability',
+                               choices=[('0', '✘'), ('1', '🔌'), ('2', '🔌🔌'), ('3', '🔌🔌🔌'), ('4', '🔌🔌🔌🔌'),
+                                        ('5', '🔌🔌🔌🔌')])
     submit = SubmitField('Submit')
+
 
 # Exercise:
 # add: Location URL, open time, closing time, coffee rating, wifi rating, power outlet rating fields
@@ -52,10 +60,10 @@ def home():
 def add_cafe():
     form = CafeForm()
     if form.validate_on_submit():
-        print("True")
-    # Exercise:
-    # Make the form write a new row into cafe-data.csv
-    # with   if form.validate_on_submit()
+        with open('cafe-data.csv', 'a', newline='',) as new_entry:
+            csv_writer = csv.writer(new_entry)
+            csv_writer.writerow([form.cafe.data, form.location.data, form.open_time.data, form.close_time.data, form.coffee_rating.data, form.wifi_strength.data, form.power_socket.data])
+        return redirect(url_for('cafes'))
     return render_template('add.html', form=form)
 
 
