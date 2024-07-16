@@ -38,7 +38,11 @@ class Bookshelf(db.Model):
 
 @app.route('/')
 def home():
-    return render_template("index.html", book_list=all_books)
+    with app.app_context():
+        result = db.session.execute(db.select(Bookshelf).order_by(Bookshelf.title))
+        library_books = result.scalars()
+        books = list(library_books)
+    return render_template("index.html", book_list=books)
 
 
 @app.route("/add", methods=["GET", "POST"])
