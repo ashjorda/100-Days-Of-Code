@@ -53,7 +53,7 @@ def add():
                                  review=request.form.get('Rating'))
             db.session.add(new_book)
             db.session.commit()
-        return render_template("index.html")
+        return redirect(url_for('home'))
     return render_template("add.html")
 
 
