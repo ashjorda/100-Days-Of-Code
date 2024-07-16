@@ -7,12 +7,12 @@
   <body>
     <h1>My Library</h1>
 
-    {% if book_list|length == 0 %}
+   {% if book_list|length == 0 %}
       <p>Library is empty.</p>
     {% else %}
       {% for book in book_list %}
         <ul>
-          <li>{{ book.title }} - {{ book.author }} - {{ book.rating }}/10</li>
+          <li>{{ book.title }} - {{ book.author }} - {{ book.review }}/10</li>
       </ul>
       {% endfor %}
      {% endif %}
