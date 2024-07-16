@@ -32,8 +32,8 @@ class Bookshelf(db.Model):
 
 
 # Create table schema in the database. Requires application context.
-with app.app_context():
-    db.create_all()
+# with app.app_context():
+#     db.create_all()
 
 
 @app.route('/')
@@ -44,12 +44,12 @@ def home():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == 'POST':
-        book = {
-            "title": request.form.get('Book Name'),
-            "author": request.form.get('Book Author'),
-            "rating": request.form.get('Rating'),
-        }
-        all_books.append(book)
+        with app.app_context():
+            new_book = Bookshelf(title=request.form.get('Book Name'), author=request.form.get('Book Author'),
+                                 review=request.form.get('Rating'))
+            db.session.add(new_book)
+            db.session.commit()
+        return render_template("index.html")
     return render_template("add.html")
 
 
