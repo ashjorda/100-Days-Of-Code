@@ -57,9 +57,20 @@ def add():
     return render_template("add.html")
 
 
-@app.route("/edit/<id>")
-def edit(id):
-    pass
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    if request.method == 'POST':
+        book_id = request.args.get('id')
+        with app.app_context():
+            book_to_update = db.get_or_404(Bookshelf, book_id)
+            book_to_update.review = request.form.get('rating')
+            db.session.commit()
+            return redirect(url_for('home'))
+
+    book_id = request.args.get('id')
+    with app.app_context():
+        book = db.session.execute(db.select(Bookshelf).where(Bookshelf.id == book_id)).scalar()
+    return render_template('edit.html', book=book)
 
 
 if __name__ == "__main__":
