@@ -57,5 +57,10 @@ def add():
     return render_template("add.html")
 
 
+@app.route("/edit/<id>")
+def edit(id):
+    pass
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=8001)
