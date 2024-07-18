@@ -44,9 +44,10 @@ class Movie(db.Model):
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     year: Mapped[int] = mapped_column(String(250), nullable=False)
+    description: Mapped[str] = mapped_column(String(250), nullable=False)
     rating: Mapped[float] = mapped_column(Float, nullable=False)
     ranking: Mapped[float] = mapped_column(Float, nullable=False)
-    review: Mapped[str] = mapped_column(String(250),  nullable=False)
+    review: Mapped[str] = mapped_column(String(250), nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
 @app.route("/")
