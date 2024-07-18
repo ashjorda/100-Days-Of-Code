@@ -50,9 +50,14 @@ class Movie(db.Model):
     review: Mapped[str] = mapped_column(String(250), nullable=False)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
+
 @app.route("/")
 def home():
-    return render_template("index.html")
+    with app.app_context():
+        result = db.session.execute(db.select(Movie).order_by(Movie.id))
+        movie_results = result.scalars()
+        movie_list = list(movie_results)
+    return render_template("index.html", movies=movie_list)
 
 
 if __name__ == '__main__':
