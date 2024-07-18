@@ -8,6 +8,13 @@ from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import requests
 
+
+class EditRating(FlaskForm):
+    rating = StringField(label='Your rating out of 10 e.g. 7.5', validators=[DataRequired()])
+    review = StringField(label='Your Review', validators=[DataRequired()])
+    done = SubmitField(label="Done")
+
+
 '''
 Red underlines? Install the required packages first: 
 Open the Terminal in PyCharm (bottom left). 
@@ -58,6 +65,20 @@ def home():
         movie_results = result.scalars()
         movie_list = list(movie_results)
     return render_template("index.html", movies=movie_list)
+
+
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    if request.method == 'POST':
+        movie_id = request.args.get('id')
+        with app.app_context():
+            movie_to_update = db.get_or_404(Movie, movie_id)
+            movie_to_update.rating = request.form.get('rating')
+            movie_to_update.review = request.form.get('review')
+            db.session.commit()
+            return redirect(url_for('home'))
+    edit_rating = EditRating()
+    return render_template("edit.html", form=edit_rating)
 
 
 if __name__ == '__main__':
