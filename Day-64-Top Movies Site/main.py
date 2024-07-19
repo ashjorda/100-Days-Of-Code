@@ -15,6 +15,11 @@ class EditRating(FlaskForm):
     done = SubmitField(label="Done")
 
 
+class AddMovie(FlaskForm):
+    title = StringField(label='Movie Title', validators=[DataRequired()])
+    done = SubmitField(label="Add Movie")
+
+
 '''
 Red underlines? Install the required packages first: 
 Open the Terminal in PyCharm (bottom left). 
@@ -93,7 +98,8 @@ def delete():
 
 @app.route("/add")
 def add():
-    return render_template('add.html')
+    new_movie = AddMovie()
+    return render_template('add.html', form=new_movie)
 
 
 if __name__ == '__main__':
