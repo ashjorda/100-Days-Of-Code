@@ -64,7 +64,7 @@ def home():
         result = db.session.execute(db.select(Movie).order_by(Movie.id))
         movie_results = result.scalars()
         movie_list = list(movie_results)
-    return render_template("index.html", movies=movie_list)
+    return render_template('index.html', movies=movie_list)
 
 
 @app.route("/edit", methods=["GET", "POST"])
@@ -78,7 +78,7 @@ def edit():
             db.session.commit()
             return redirect(url_for('home'))
     edit_rating = EditRating()
-    return render_template("edit.html", form=edit_rating)
+    return render_template('edit.html', form=edit_rating)
 
 
 @app.route("/delete")
@@ -89,6 +89,11 @@ def delete():
         db.session.delete(movie_to_delete)
         db.session.commit()
         return redirect(url_for('home'))
+
+
+@app.route("/add")
+def add():
+    return render_template('add.html')
 
 
 if __name__ == '__main__':
