@@ -58,9 +58,9 @@ class Movie(db.Model):
     title: Mapped[str] = mapped_column(String(250), unique=True, nullable=False)
     year: Mapped[int] = mapped_column(String(250), nullable=False)
     description: Mapped[str] = mapped_column(String(250), nullable=False)
-    rating: Mapped[float] = mapped_column(Float, nullable=False)
-    ranking: Mapped[float] = mapped_column(Float, nullable=False)
-    review: Mapped[str] = mapped_column(String(250), nullable=False)
+    rating: Mapped[float] = mapped_column(Float, nullable=True)
+    ranking: Mapped[float] = mapped_column(Float, nullable=True)
+    review: Mapped[str] = mapped_column(String(250), nullable=True)
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
 
@@ -124,6 +124,23 @@ def add():
         #     return redirect(url_for('home'))
     new_movie = AddMovie()
     return render_template('add.html', form=new_movie)
+
+
+@app.route("/select")
+def select():
+    movie_id = request.args.get('id')
+    token = os.environ['token']
+    headers = {
+        'Authorization': token,
+        'accept': 'application/json'
+    }
+    search = requests.get(url=f'https://api.themoviedb.org/3/movie/{movie_id}', headers=headers)
+    search_result = search.json()
+    with app.app_context():
+        new_entry = Movie(title=search_result['original_title'], year=search_result['release_date'].split('-')[0], description=search_result['overview'], rating=None, ranking=None, review=None, img_url=f"https://image.tmdb.org/t/p/w500/{search_result['poster_path']}")
+        db.session.add(new_entry)
+        db.session.commit()
+    return redirect(url_for('home'))
 
 
 if __name__ == '__main__':
