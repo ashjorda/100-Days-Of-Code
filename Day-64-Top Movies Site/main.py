@@ -7,6 +7,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired
 import requests
+import os
 
 
 class EditRating(FlaskForm):
@@ -96,11 +97,27 @@ def delete():
         return redirect(url_for('home'))
 
 
-@app.route("/add")
+@app.route("/add", methods=["GET", "POST"])
 def add():
+    if request.method == 'POST':
+        search_string = request.form.get('title')
+        token = os.environ['token']
+        headers = {
+            'Authorization': token,
+            'accept': 'application/json'
+        }
+        search = requests.get(url=f'https://api.themoviedb.org/3/search/movie?query={search_string}', headers=headers)
+        search_result = search.json()
+        print(search_result)
+        # with app.app_context():
+        #     movie_to_update = db.get_or_404(Movie, movie_id)
+        #     movie_to_update.rating = request.form.get('rating')
+        #     movie_to_update.review = request.form.get('review')
+        #     db.session.commit()
+        #     return redirect(url_for('home'))
     new_movie = AddMovie()
     return render_template('add.html', form=new_movie)
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=8001)
