@@ -7,7 +7,7 @@
     <h1 class="heading">Select Movie</h1>
 {% for title in movie_results %}
   <p>
-    <a href="#"> {{ title[1] }} - {{ title[2] }}</a>
+    <a href="{{ url_for('select', id=title[0]) }}"> {{ title[1] }} - {{ title[2] }}</a>
   </p>
 {% endfor %}
 </div>
