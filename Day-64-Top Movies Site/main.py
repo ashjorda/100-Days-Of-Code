@@ -100,6 +100,7 @@ def delete():
 @app.route("/add", methods=["GET", "POST"])
 def add():
     if request.method == 'POST':
+        movie_list = []
         search_string = request.form.get('title')
         token = os.environ['token']
         headers = {
@@ -108,7 +109,13 @@ def add():
         }
         search = requests.get(url=f'https://api.themoviedb.org/3/search/movie?query={search_string}', headers=headers)
         search_result = search.json()
-        print(search_result)
+        for title in search_result['results']:
+            title_id = title['id']
+            original_title = title['original_title']
+            title_year = title['release_date']
+            movie_entry = title_id, original_title, title_year
+            movie_list.append(movie_entry)
+        return render_template('select.html', movie_results=movie_list)
         # with app.app_context():
         #     movie_to_update = db.get_or_404(Movie, movie_id)
         #     movie_to_update.rating = request.form.get('rating')
