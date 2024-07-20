@@ -116,12 +116,6 @@ def add():
             movie_entry = title_id, original_title, title_year
             movie_list.append(movie_entry)
         return render_template('select.html', movie_results=movie_list)
-        # with app.app_context():
-        #     movie_to_update = db.get_or_404(Movie, movie_id)
-        #     movie_to_update.rating = request.form.get('rating')
-        #     movie_to_update.review = request.form.get('review')
-        #     db.session.commit()
-        #     return redirect(url_for('home'))
     new_movie = AddMovie()
     return render_template('add.html', form=new_movie)
 
