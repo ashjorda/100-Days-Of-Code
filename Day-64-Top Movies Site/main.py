@@ -67,8 +67,8 @@ class Movie(db.Model):
 @app.route("/")
 def home():
     with app.app_context():
-        result = db.session.execute(db.select(Movie).order_by(Movie.id))
-        movie_results = result.scalars()
+        result = db.session.execute(db.select(Movie).order_by(Movie.rating))
+        movie_results = result.scalars().all()
         movie_list = list(movie_results)
     return render_template('index.html', movies=movie_list)
 
@@ -124,6 +124,7 @@ def add():
 def select():
     movie_id = request.args.get('id')
     token = os.environ['token']
+    token = os.environ['token']
     headers = {
         'Authorization': token,
         'accept': 'application/json'
@@ -131,10 +132,11 @@ def select():
     search = requests.get(url=f'https://api.themoviedb.org/3/movie/{movie_id}', headers=headers)
     search_result = search.json()
     with app.app_context():
-        new_entry = Movie(title=search_result['original_title'], year=search_result['release_date'].split('-')[0], description=search_result['overview'], rating=None, ranking=None, review=None, img_url=f"https://image.tmdb.org/t/p/w500/{search_result['poster_path']}")
+        new_entry = Movie(title=search_result['original_title'], year=search_result['release_date'].split('-')[0], description=search_result['overview'], rating=None, ranking=search_result['popularity'], review=None, img_url=f"https://image.tmdb.org/t/p/w500/{search_result['poster_path']}")
         db.session.add(new_entry)
         db.session.commit()
-    return redirect(url_for('home'))
+    db_id = db.session.execute(db.select(Movie.id).where(Movie.title == search_result['original_title'])).scalar()
+    return redirect(url_for('edit', id=db_id))
 
 
 if __name__ == '__main__':
