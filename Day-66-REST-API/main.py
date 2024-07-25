@@ -63,17 +63,17 @@ def cafe():
         cafes = db.session.execute(db.select(Cafe)).scalars().all()
         random_cafe = random.choice(cafes)
         return jsonify(cafe={
-                'can_take_calls': random_cafe.can_take_calls,
-                'coffee_price': random_cafe.coffee_price,
-                'has_sockets': random_cafe.has_sockets,
-                'has_wifi': random_cafe.has_wifi,
-                # 'id': random_cafe.id,
-                'img_url': random_cafe.img_url,
-                'location': random_cafe.location,
-                'map_url': random_cafe.map_url,
-                'name': random_cafe.name,
-                'seats': random_cafe.seats
-            })
+            'can_take_calls': random_cafe.can_take_calls,
+            'coffee_price': random_cafe.coffee_price,
+            'has_sockets': random_cafe.has_sockets,
+            'has_wifi': random_cafe.has_wifi,
+            # 'id': random_cafe.id,
+            'img_url': random_cafe.img_url,
+            'location': random_cafe.location,
+            'map_url': random_cafe.map_url,
+            'name': random_cafe.name,
+            'seats': random_cafe.seats
+        })
 
 
 @app.route("/all")
