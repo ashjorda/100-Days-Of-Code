@@ -4,7 +4,6 @@ from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 from sqlalchemy import Integer, String, Boolean
 import random
 
-
 '''
 Install the required packages first: 
 Open the Terminal in PyCharm (bottom left). 
@@ -124,10 +123,25 @@ def search_cafes():
             return jsonify(cafe=location_results)
 
 
-
-
-
 # HTTP POST - Create Record
+@app.route("/add", methods=['POST'])
+def add_new_cafe():
+    new_cafe = Cafe(
+        can_take_calls=bool(request.form.get('can_take_calls')),
+        has_sockets=bool(request.form.get('has_sockets')),
+        has_wifi=bool(request.form.get('has_wifi')),
+        has_toilet=bool(request.form.get('has_toilet')),
+        coffee_price=request.form.get('coffee_price'),
+        img_url=request.form.get('img_url'),
+        location=request.form.get('location'),
+        map_url=request.form.get('map_url'),
+        name=request.form.get('name'),
+        seats=request.form.get('seats'),
+    )
+    with app.app_context():
+        db.session.add(new_cafe)
+        db.session.commit()
+    return jsonify(response={'success': "Successfully added the new cafe."})
 
 # HTTP PUT/PATCH - Update Record
 
