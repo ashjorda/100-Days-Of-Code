@@ -132,7 +132,7 @@ def select():
     search = requests.get(url=f'https://api.themoviedb.org/3/movie/{movie_id}', headers=headers)
     search_result = search.json()
     with app.app_context():
-        new_entry = Movie(title=search_result['original_title'], year=search_result['release_date'].split('-')[0], description=search_result['overview'], rating=None, ranking=search_result['popularity'], review=None, img_url=f"https://image.tmdb.org/t/p/w500/{search_result['poster_path']}")
+        new_entry = Movie(title=search_result['original_title'], year=search_result['release_date'].split('-')[0], description=search_result['overview'], rating=None, ranking=None, review=None, img_url=f"https://image.tmdb.org/t/p/w500/{search_result['poster_path']}")
         db.session.add(new_entry)
         db.session.commit()
     db_id = db.session.execute(db.select(Movie.id).where(Movie.title == search_result['original_title'])).scalar()
