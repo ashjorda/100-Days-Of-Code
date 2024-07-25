@@ -76,6 +76,29 @@ def cafe():
             })
 
 
+@app.route("/all")
+def all_cafes():
+    with app.app_context():
+        results = []
+        cafe_result = db.session.execute(db.select(Cafe)).scalars().all()
+        for result in cafe_result:
+            cafe_attributes = {
+                'can_take_calls': result.can_take_calls,
+                'coffee_price': result.coffee_price,
+                'has_sockets': result.has_sockets,
+                'has_wifi': result.has_wifi,
+                'id': result.id,
+                'img_url': result.img_url,
+                'location': result.location,
+                'map_url': result.map_url,
+                'name': result.name,
+                'seats': result.seats
+            }
+            results.append(cafe_attributes)
+        return jsonify(cafe=results)
+
+
+
 # HTTP POST - Create Record
 
 # HTTP PUT/PATCH - Update Record
