@@ -57,6 +57,9 @@ with app.app_context():
 def get_all_posts():
     # TODO: Query the database for all the posts. Convert the data to a python list.
     posts = []
+    all_blog_post = db.session.execute(db.select(BlogPost).order_by(BlogPost.id)).scalars()
+    for blog_post in all_blog_post:
+        posts.append(blog_post)
     return render_template("index.html", all_posts=posts)
 
 
