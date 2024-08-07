@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
@@ -49,7 +49,6 @@ class BlogPost(db.Model):
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
 
-
 # Create table schema in the database. Requires application context.
 with app.app_context():
     db.create_all()
@@ -61,7 +60,7 @@ class MyForm(FlaskForm):
     subtitle = StringField('Subtitle', validators=[DataRequired()])
     your_name = StringField('Your Name', validators=[DataRequired()])
     blog_img_url = StringField('Blog Image URL', validators=[DataRequired()])
-    blog_content = StringField('Blog Content', validators=[DataRequired()])
+    blog_content = CKEditorField('Blog Content', validators=[DataRequired()])
     submit = SubmitField('Submit Post')
 
 
