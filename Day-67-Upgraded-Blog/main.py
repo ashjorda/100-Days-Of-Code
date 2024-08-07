@@ -48,9 +48,20 @@ class BlogPost(db.Model):
     img_url: Mapped[str] = mapped_column(String(250), nullable=False)
 
 
+
 # Create table schema in the database. Requires application context.
 with app.app_context():
     db.create_all()
+
+
+# Configure form for make-post.html
+class MyForm(FlaskForm):
+    title = StringField('Blog Post Title', validators=[DataRequired()])
+    subtitle = StringField('Subtitle', validators=[DataRequired()])
+    your_name = StringField('Your Name', validators=[DataRequired()])
+    blog_img_url = StringField('Blog Image URL', validators=[DataRequired()])
+    blog_content = StringField('Blog Content', validators=[DataRequired()])
+    submit = SubmitField('Submit Post')
 
 
 @app.route('/')
@@ -74,7 +85,9 @@ def show_post(post_id):
 # TODO: add_new_post() to create a new blog post
 @app.route('/new-post')
 def new_post():
-    return render_template("make-post.html")
+    form = MyForm()
+    return render_template("make-post.html", form=form)
+
 
 # TODO: edit_post() to change an existing blog post
 
