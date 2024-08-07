@@ -83,9 +83,21 @@ def show_post(post_id):
 
 
 # TODO: add_new_post() to create a new blog post
-@app.route('/new-post')
+@app.route('/new-post', methods=("GET", "POST"))
 def new_post():
     form = MyForm()
+    if request.method == 'POST':
+        blog_title = request.form.get('title')
+        blog_subtitle = request.form.get('subtitle')
+        blog_date = date.today().strftime("%B %d, %Y")
+        blog_content = request.form.get('blog_content')
+        blog_img_url = request.form.get('blog_img_url')
+        blog_author = request.form.get('your_name')
+
+        new_blog = BlogPost(title=blog_title, subtitle=blog_subtitle, date=blog_date, body=blog_content, img_url=blog_img_url, author=blog_author)
+        db.session.add(new_blog)
+        db.session.commit()
+        return redirect(url_for('get_all_posts'))
     return render_template("make-post.html", form=form)
 
 
