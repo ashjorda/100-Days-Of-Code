@@ -1,5 +1,5 @@
 {% block content %} {% include "header.html" %}
-
+{% from 'bootstrap5/form.html' import render_field %}
 <!-- Page Header -->
 <header
   class="masthead"
@@ -25,6 +25,15 @@
     <div class="row">
       <div class="col-lg-8 col-md-10 mx-auto">
         <!-- TODO:-Add CKEditor and render the form here -->
+         <form method="post">
+            {{ form.csrf_token() }}
+            {{ render_field(form.title) }}
+            {{ render_field(form.subtitle) }}
+            {{ render_field(form.your_name) }}
+            {{ render_field(form.blog_img_url) }}
+            {{ render_field(form.blog_content) }}
+            {{ render_field(form.submit) }}
+          </form>
       </div>
     </div>
   </div>
