@@ -102,6 +102,9 @@ def new_post():
 
 
 # TODO: edit_post() to change an existing blog post
+@app.route('/edit-post/<post_id>')
+def edit_post(post_id):
+    return render_template("make-post.html")
 
 # TODO: delete_post() to remove a blog post from the database
 

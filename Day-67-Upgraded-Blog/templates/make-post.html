@@ -34,6 +34,9 @@
             {{ render_field(form.blog_content) }}
             {{ render_field(form.submit) }}
           </form>
+
+          {{ ckeditor.load() }}
+          {{ ckeditor.config(name='blog_content') }}
       </div>
     </div>
   </div>
