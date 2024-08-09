@@ -105,7 +105,7 @@ def new_post():
 @app.route('/edit-post/<post_id>')
 def edit_post(post_id):
     form = MyForm()
-    return render_template("make-post.html", form=form)
+    return render_template("make-post.html", form=form, edit=True)
 
 # TODO: delete_post() to remove a blog post from the database
 
