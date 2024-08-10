@@ -86,7 +86,7 @@ def show_post(post_id):
 @app.route('/new-post', methods=("GET", "POST"))
 def new_post():
     form = MyForm()
-    if request.method == 'POST':
+    if form.validate_on_submit():
         blog_title = request.form.get('title')
         blog_subtitle = request.form.get('subtitle')
         blog_date = date.today().strftime("%B %d, %Y")
@@ -104,11 +104,10 @@ def new_post():
 # TODO: edit_post() to change an existing blog post
 @app.route('/edit-post/<post_id>', methods=("GET", "POST"))
 def edit_post(post_id):
-    post = db.session.execute(db.select(BlogPost).where(BlogPost.id == post_id)).scalar()
+    post = db.get_or_404(BlogPost, post_id)
     form = MyForm(title=post.title, subtitle=post.subtitle, blog_img_url=post.img_url, your_name=post.author,blog_content=post.body)
-    
-    if request.method == 'POST':
-        post = db.session.execute(db.select(BlogPost).where(BlogPost.id == post_id)).scalar()
+
+    if form.validate_on_submit():
         post.title = request.form.get('title')
         post.subtitle = request.form.get('subtitle')
         post.body = request.form.get('blog_content')
